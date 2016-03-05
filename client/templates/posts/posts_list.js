@@ -1,7 +1,7 @@
 /**
  * Created by hyelim on 2016. 2. 22..
  */
-var postsData = [
+/*var postsData = [
     {title : 'Introducing Telescope',
      url   : 'http://sachagreif.com/introducing-telescope/'},
     {title : 'Meteor',
@@ -9,9 +9,9 @@ var postsData = [
     {title : 'The Meteor Book',
      url   : 'http://themeteorbook.com'}
 ];
-
+*/
 Template.postsList.helpers({
     posts: function() {
-        return Posts.find();
+        return Posts.find({}, {sort : {submitted: -1}});
     }
 });
