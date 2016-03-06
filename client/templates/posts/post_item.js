@@ -4,9 +4,11 @@
 Template.postItem.helpers({
     ownPost : function(){
         var isOwn = false;
-        if(this.userId){
+        console.log(this.userId);
+        if(this.userId === Meteor.userId()){
             isOwn = true;
         }
+        console.log(this.userId + " :: isOwn :: " + isOwn)
       return isOwn;
     },
 
