@@ -1,9 +1,18 @@
 /**
  * Created by hyelim on 2016. 2. 24..
  */
-Meteor.publish('posts', function(){
+Meteor.publish('posts', function(options){
+    check(options, {
+        sort: Object,
+        limit : Number
+    });
 
-    return Posts.find();
+    return Posts.find({}, options);
+});
+
+Meteor.publish('singlePost', function(id) {
+    check(id, String)
+    return Posts.find(id)
 });
 
 Meteor.publish('comments', function(postId){
