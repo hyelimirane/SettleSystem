@@ -19,7 +19,7 @@ if(Posts.find().count() == 0){
     });
 }
 */
-
+/*
 if(Posts.find().count() === 0){
     var now = new Date().getTime();
 
@@ -77,4 +77,46 @@ if(Posts.find().count() === 0){
         submitted: new Date(now - 12 * 3600 * 1000),
         commentsCount: 0
     });
+}
+
+ */
+if(Posts.find().count() === 0){
+    var now = new Date().getTime();
+
+    var sacha = Meteor.users.findOne({username:'sacha'});
+    var tom = Meteor.users.findOne({username:'tom'});
+
+    Meteor.users.update(
+        {_id: tom._id},
+        {
+            $set:{profile:{name:'Tom Coleman'}}
+        }
+    );
+
+    Meteor.users.update(
+        {_id: sacha._id},
+        {
+            $set:{profile:{name:'Sacha Greif'}}
+        }
+    );
+
+    Posts.insert({
+        title: 'The Meteor Book',
+        userId: tom._id,
+        author: tom.profile.name,
+        url: 'http://themeteorbook.com',
+        submitted: new Date(now - 12 * 3600 * 1000),
+        commentsCount: 0
+    });
+
+    for (var i = 0; i < 10; i++) {
+        Posts.insert({
+            title: 'Test post #' + i,
+            author: sacha.profile.name,
+            userId: sacha._id,
+            url: 'http://google.com/?q=test-' + i,
+            submitted: new Date(now - i * 3600 * 1000),
+            commentsCount: 0
+        });
+    }
 }
